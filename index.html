@@ -1,0 +1,41 @@
+<!-- Tarea de programacion web, creada por Liam Marcos Jimenez Perez -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Agenda Web</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Agregar usuarios</h2>
+    <form id="userForm">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" required>
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" required>
+      <label for="telefono">Teléfono:</label>
+      <input type="text" id="telefono" required>
+
+      <div class="buttons-container">
+        <button type="button" id="agregarContacto">Agregar</button>
+        <button type="button" id="obtenerContactos">Obtener</button>
+        <button type="button" id="eliminarContactos">Eliminar</button>
+      </div>
+
+    </form>
+  </div>
+  <table id="usersTable">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Teléfono</th>
+      </tr>
+    </thead>
+    <tbody id="usersTableBody"></tbody>
+  </table>
+
+  <script src="js/agenda.js"></script>
+</body>
+</html>
