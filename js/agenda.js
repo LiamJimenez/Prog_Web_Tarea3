@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
+
+  // Obtener referencia al botón "Agregar"
   var agregarUsuarioBtn = document.getElementById("agregarContacto");
   agregarUsuarioBtn.addEventListener("click", function() {
     var nombre = document.getElementById("nombre").value;
@@ -12,11 +14,13 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("telefono").value = "";
   });
 
+  // Obtener referencia al botón "Obtener"
   var obtenerContactosBtn = document.getElementById("obtenerContactos");
   obtenerContactosBtn.addEventListener("click", function() {
     obtenerContactos();
   });
 
+  // Obtener referencia al botón "Eliminar"
   var eliminarContactosBtn = document.getElementById("eliminarContactos");
   eliminarContactosBtn.addEventListener("click", function() {
     var filasSeleccionadas = document.querySelectorAll("tr.selected");
@@ -30,16 +34,19 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
+  // Crear un contenedor para los botones
   var buttonsContainer = document.createElement("div");
   buttonsContainer.classList.add("buttons-container");
   buttonsContainer.appendChild(agregarUsuarioBtn);
   buttonsContainer.appendChild(obtenerContactosBtn);
   buttonsContainer.appendChild(eliminarContactosBtn);
 
+  // Obtener referencia al formulario de usuarios
   var userForm = document.getElementById("userForm");
   userForm.appendChild(buttonsContainer);
 });
 
+// Función para agregar un usuario a la tabla
 function agregarUsuarioTabla(nombre, apellido, telefono) {
   var tabla = document.getElementById("usersTableBody");
   var primeraFila = tabla.rows[0];
@@ -62,9 +69,13 @@ function agregarUsuarioTabla(nombre, apellido, telefono) {
   tabla.insertBefore(nuevaFila, primeraFila);
 }
 
+// Función para obtener los contactos 
 function obtenerContactos() {
-  fetch("http://www.raydelto.org/agenda.php")
+  fetch("https://railway-node-express-production-3b13.up.railway.app/scrape")
     .then(function(response) {
+      if (!response.ok) {
+        throw new Error("Error en la solicitud. Estado: " + response.status);
+      }
       return response.json();
     })
     .then(function(data) {
@@ -80,14 +91,18 @@ function obtenerContactos() {
     });
 }
 
+// Función para marcar una fila como seleccionada
 function marcarFilaSeleccionada(fila) {
   fila.classList.toggle("selected");
 }
 
+// Función para eliminar una fila de la tabla
 function eliminarFilaTabla(fila) {
   var tabla = document.getElementById("usersTableBody");
   tabla.removeChild(fila);
 }
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
   var agregarUsuarioBtn = document.getElementById("agregarContacto");
